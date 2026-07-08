@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Johnmel Indanan — Digital Growth Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --bg:       #080c10;
+  --surface:  #0d1318;
+  --card:     #111820;
+  --teal:     #0a98ab;
+  --teal-dim: rgba(10,152,171,0.12);
+  --teal-mid: rgba(10,152,171,0.3);
+  --purple:   #aea4d4;
+  --gold:     #eaba73;
+  --text:     #f0f4f6;
+  --muted:    rgba(240,244,246,0.45);
+  --border:   rgba(10,152,171,0.15);
+  --radius:   14px;
+}
+
+/* ─────────────────────────────────────────
+   BASE
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─────────────────────────────────────────
+   AMBIENT CANVAS (signature element)
+   A subtle particle field that lives behind
+   all content — gives the page depth without
+   screaming "AI template".
+───────────────────────────────────────── */
+#ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(8,12,16,0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s ease;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.nav-logo span { color: var(--teal); }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal); }
+.nav-cta {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 22px;
+  border-radius: 6px;
+  background: var(--teal);
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: #08818f; transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 48px;
+  padding-top: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.35s forwards;
+}
+
+.hero-role {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: clamp(20px, 3vw, 32px);
+  color: var(--teal);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.5s forwards;
+}
+
+.hero-desc {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.65s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.8s forwards;
+}
+.btn-primary {
+  padding: 14px 32px;
+  background: var(--teal);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-primary:hover { background: #08818f; transform: translateY(-2px); box-shadow: 0 12px 24px rgba(10,152,171,0.35); }
+.btn-primary:hover::after { left: 150%; }
+
+.btn-outline {
+  padding: 14px 32px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+/* hero stats */
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1s forwards;
+}
+.hero-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+.hero-stat-num span { color: var(--teal); }
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: fadeIn 1s ease 1.4s forwards;
+}
+.scroll-hint-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--teal), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(0.7); }
+}
+
+/* ─────────────────────────────────────────
+   SECTIONS SHARED
+───────────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-bottom: 64px;
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────
+   SKILLS / EXPERTISE
+───────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--purple));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.skill-card:hover { border-color: var(--teal-mid); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(10,152,171,0.15); }
+.skill-card:hover::before { transform: scaleX(1); }
+
+.skill-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--teal-dim);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.skill-icon svg {
+  width: 20px; height: 20px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.skill-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.skill-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────
+   WORK / PROJECTS
+───────────────────────────────────────── */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.work-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.work-card:hover { border-color: var(--teal-mid); transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+
+.work-thumb {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, #0d2535, #0a1628);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.work-thumb-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.work-thumb-glow {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.3;
+}
+.wg-1 { background: var(--teal); top: -40px; right: -40px; }
+.wg-2 { background: var(--purple); bottom: -40px; left: -40px; }
+.wg-3 { background: var(--gold); top: -20px; left: -20px; }
+
+.work-body { padding: 24px 26px; }
+.work-tags {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.work-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 10px;
+}
+.work-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.work-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* wide card */
+.work-card.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+.work-card.wide .work-thumb { height: 100%; min-height: 260px; }
+
+/* ─────────────────────────────────────────
+   STACK / TOOLS
+───────────────────────────────────────── */
+.stack-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stack-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.stack-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.stack-pill:hover { border-color: var(--teal-mid); color: var(--text); transform: translateY(-2px); }
+.stack-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+}
+
+/* ─────────────────────────────────────────
+   EXPERIENCE TIMELINE
+───────────────────────────────────────── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px; top: 20px; bottom: 20px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--teal), rgba(10,152,171,0.1));
+}
+.tl-item {
+  display: flex;
+  gap: 32px;
+  padding-bottom: 44px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  width: 39px; height: 39px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 16px rgba(10,152,171,0.3);
+}
+.tl-dot svg {
+  width: 15px; height: 15px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tl-content { flex: 1; padding-top: 6px; }
+.tl-period {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.tl-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.tl-company {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.tl-desc {
+  font-size: 13.5px;
+  color: rgba(240,244,246,0.55);
+  line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 36px;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.contact-link:hover { border-color: var(--teal-mid); color: var(--text); transform: translateX(4px); }
+.contact-link-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--teal-dim);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-link-icon svg {
+  width: 16px; height: 16px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* avail badge */
+.avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+  margin-bottom: 24px;
+}
+.avail-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left {
+  font-size: 13px;
+  color: rgba(240,244,246,0.3);
+}
+.footer-left strong { color: var(--teal); }
+
+/* ─────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 24px; padding-top: 90px; }
+  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  .section { padding: 80px 24px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card.wide { grid-template-columns: 1fr; }
+  .work-card.wide .work-thumb { min-height: 200px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer { flex-direction: column; gap: 12px; text-align: center; }
+  .scroll-hint { display: none; }
+}
+@media (max-width: 480px) {
+  .hero-name { font-size: 42px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- AMBIENT CANVAS -->
+<canvas id="ambient"></canvas>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">JI<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:johnmelindanan@gmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative;z-index:1;">
+<div class="hero" style="max-width:1200px;margin:0 auto;padding:0 48px;padding-top:100px;">
+  <div class="hero-eyebrow">Digital Growth Specialist</div>
+  <h1 class="hero-name">Johnmel<br/>Indanan.</h1>
+  <p class="hero-role">GHL Expert · Funnel Builder · Automation Strategist</p>
+  <p class="hero-desc">I build digital ecosystems that convert — from GoHighLevel platforms and membership portals to full marketing automation. Based in the Philippines, working with Australian health &amp; wellness brands.</p>
+  <div class="hero-actions">
+    <a href="#work" class="btn-primary">View my work</a>
+    <a href="#contact" class="btn-outline">Let's talk</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">3<span>+</span></div>
+      <div class="hero-stat-label">Years experience</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">15<span>+</span></div>
+      <div class="hero-stat-label">Funnels built</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">100<span>%</span></div>
+      <div class="hero-stat-label">Client focus</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">1</div>
+      <div class="hero-stat-label">Current client: Neurotherapy AU</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-hint-line"></div>
+    Scroll
+  </div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="section-eyebrow reveal">What I do</div>
+  <h2 class="section-title reveal">Built for growth.<br/>Designed to convert.</h2>
+  <p class="section-desc reveal">Every system I build connects strategy to execution — from the first click to the recurring revenue.</p>
+
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="skill-name">GoHighLevel (GHL)</div>
+      <div class="skill-desc">Full-platform configuration — funnels, automations, pipelines, membership portals, client portals, AI workflows and custom CSS/JS components.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+      </div>
+      <div class="skill-name">Funnel & Automation</div>
+      <div class="skill-desc">End-to-end sales funnels with smart automation sequences, drip campaigns, lead nurturing workflows and trigger-based pipelines.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="skill-name">Custom Code & UI</div>
+      <div class="skill-desc">Hand-coded HTML/CSS/JS components — typing animations, carousels, pricing tables, countdown timers, step cards and splash screens.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="skill-name">SEO & Digital Marketing</div>
+      <div class="skill-desc">Search engine optimisation, Google Ads strategy, social media planning, email deliverability and conversion rate optimisation.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="skill-name">Membership Portals</div>
+      <div class="skill-desc">Course creation, offer configuration, member access management, onboarding flows and portal branding inside GHL Client Portal.</div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="skill-name">CRM & Pipeline Management</div>
+      <div class="skill-desc">Contact management, pipeline stage automation, tagging strategies, lead scoring and smart list segmentation.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="section" style="padding-top:0;">
+  <div class="section-eyebrow reveal">Selected work</div>
+  <h2 class="section-title reveal">Projects that moved<br/>the needle.</h2>
+  <p class="section-desc reveal">Real builds for real businesses — focused on conversion, retention and measurable results.</p>
+
+  <div class="work-grid">
+
+    <div class="work-card wide reveal">
+      <div class="work-thumb">
+        <div class="work-thumb-glow wg-1"></div>
+        <div class="work-thumb-glow wg-2"></div>
+        <img src="https://assets.cdn.filesafe.space/yTqyzmYR12TI1tQVjQtD/media/69fc22cd0394c98503893399.svg" alt="Neurotherapy Australia" style="width:120px;opacity:0.35;"/>
+      </div>
+      <div class="work-body" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="work-tags">
+          <span class="work-tag">GHL</span>
+          <span class="work-tag">Membership Portal</span>
+          <span class="work-tag">Automation</span>
+          <span class="work-tag">Custom Code</span>
+        </div>
+        <div class="work-title">Neurotherapy Australia — Full Digital Ecosystem</div>
+        <div class="work-desc">Built and configured the complete GHL platform for Neurotherapy Australia — including the NeuroBoost membership portal, 14-module course structure, automated email sequences, pipeline stages, custom-coded UI components (typing animations, pricing tables, carousels, countdown timers), SEO, and domain setup.</div>
+      </div>
+    </div>
+
+    <div class="work-card reveal">
+      <div class="work-thumb">
+        <div class="work-thumb-glow wg-3"></div>
+        <div class="work-thumb-label">Membership Portal</div>
+      </div>
+      <div class="work-body">
+        <div class="work-tags">
+          <span class="work-tag">GHL Portal</span>
+          <span class="work-tag">UI/UX</span>
+        </div>
+        <div class="work-title">NeuroBoost Members Portal</div>
+        <div class="work-desc">Custom login experience with JavaScript-injected centering fixes, branded splash screen preloader, course navigation and offer access configuration.</div>
+      </div>
+    </div>
+
+    <div class="work-card reveal">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#1a0830,#0d1b2a);">
+        <div class="work-thumb-glow" style="background:var(--purple);top:-30px;right:-30px;opacity:0.25;"></div>
+        <div class="work-thumb-label">Automation</div>
+      </div>
+      <div class="work-body">
+        <div class="work-tags">
+          <span class="work-tag">Workflows</span>
+          <span class="work-tag">Pipeline</span>
+        </div>
+        <div class="work-title">Membership Automation System</div>
+        <div class="work-desc">10-stage pipeline with automated triggers — from lead capture through purchase, active member drip, re-engagement, completion and upsell sequences.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STACK -->
+<div class="stack-section" id="stack">
+<div class="section" style="padding-top:80px;padding-bottom:80px;">
+  <div class="section-eyebrow reveal">Tools & Stack</div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">What I work with.</h2>
+  <div class="stack-grid">
+    <div class="stack-pill reveal"><span class="stack-dot"></span>GoHighLevel (GHL)</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>HTML / CSS / JavaScript</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>GoDaddy / DNS</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Canva</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Figma</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>ChatGPT / Claude AI</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Google Analytics</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Stripe</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Zapier</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Facebook Ads</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>SEO Tools</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Email Marketing</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Loom</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Trello</div>
+    <div class="stack-pill reveal"><span class="stack-dot"></span>Slack</div>
+  </div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="section-eyebrow reveal">Experience</div>
+  <h2 class="section-title reveal">Where I've built.</h2>
+  <p class="section-desc reveal">A focused track record in digital operations, automation and platform management.</p>
+
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-dot">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">2024 — Present</div>
+        <div class="tl-role">Digital Marketing & GHL Specialist</div>
+        <div class="tl-company">Neurotherapy Australia · Remote (Philippines → Australia)</div>
+        <div class="tl-desc">Full GHL platform ownership for Neurotherapy Australia. Responsible for membership portal, course infrastructure, automation workflows, custom-coded UI components, SEO, DNS configuration and all digital marketing assets across the NeuroBoost, NeuroReady and 4 to Restore programs.</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">2022 — 2024</div>
+        <div class="tl-role">Funnel Builder & Automation Specialist</div>
+        <div class="tl-company">Freelance · Philippines</div>
+        <div class="tl-desc">Designed and built sales funnels, landing pages and CRM automation workflows for health, coaching and e-commerce clients. Specialised in GoHighLevel platform setup, custom code injection and email sequence architecture.</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+      </div>
+      <div class="tl-content">
+        <div class="tl-period">2020 — 2022</div>
+        <div class="tl-role">Digital Marketing Assistant</div>
+        <div class="tl-company">Various Clients · Philippines</div>
+        <div class="tl-desc">Social media management, content creation, basic SEO and advertising support for local and international clients. Built foundational skills in digital tools, graphic design and client communication.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="contact-grid">
+    <div>
+      <div class="section-eyebrow reveal">Contact</div>
+      <h2 class="section-title reveal">Let's build<br/>something together.</h2>
+      <p class="section-desc reveal" style="margin-bottom:24px;">Open to new projects, freelance work and long-term partnerships. Based in the Philippines and experienced working remotely with Australian clients.</p>
+      <div class="avail reveal"><span class="avail-dot"></span>Available for new projects</div>
+      <div class="contact-links">
+        <a href="mailto:johnmelindanan@gmail.com" class="contact-link reveal">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          johnmelindanan@gmail.com
+        </a>
+        <a href="https://neurotherapyaustralia.com.au" target="_blank" class="contact-link reveal">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          neurotherapyaustralia.com.au
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal" style="padding-top:60px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:24px;">Quick facts</div>
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:3px;">Location</div>
+            <div style="font-size:14px;font-weight:500;color:var(--text);">Angeles City, Philippines</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:3px;">Time Zone</div>
+            <div style="font-size:14px;font-weight:500;color:var(--text);">PHT (UTC +8)</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:3px;">Primary Platform</div>
+            <div style="font-size:14px;font-weight:500;color:var(--text);">GoHighLevel (GHL)</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:3px;">Specialisation</div>
+            <div style="font-size:14px;font-weight:500;color:var(--text);">Health & Wellness Brands</div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:3px;">Languages</div>
+            <div style="font-size:14px;font-weight:500;color:var(--text);">English, Filipino</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">Built by <strong>Johnmel Indanan</strong> · Digital Growth Specialist · Angeles City, Philippines</div>
+  <div style="font-size:12px;color:rgba(240,244,246,0.25);">© 2026</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* ── Ambient particle canvas ── */
+(function() {
+  var canvas = document.getElementById('ambient');
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * 1920,
+      y: Math.random() * 1080,
+      r: Math.random() * 1.2 + 0.3,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      o: Math.random() * 0.4 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(10,152,171,' + p.o + ')';
+      ctx.fill();
+    });
+    // draw faint connection lines
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 160) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(10,152,171,' + (0.06 * (1 - dist/160)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Scroll reveal ── */
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() {
+          e.target.classList.add('visible');
+        }, 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el) { io.observe(el); });
+})();
+
+/* ── Nav shrink on scroll ── */
+window.addEventListener('scroll', function() {
+  var nav = document.querySelector('.nav');
+  if (window.scrollY > 60) {
+    nav.style.padding = '14px 48px';
+  } else {
+    nav.style.padding = '20px 48px';
+  }
+});
+</script>
+
+</body>
+</html>
